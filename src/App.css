@@ -1,7 +1,12 @@
-.App {
+.App{
   text-align: center;
 }
-
+.mainContainer , .sectionContainer{
+  display: grid;
+  grid-template-columns: repeat(5,17%);
+  justify-content:space-evenly;
+  gap: 30px;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
