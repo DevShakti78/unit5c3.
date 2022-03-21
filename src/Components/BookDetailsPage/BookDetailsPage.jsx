@@ -1,21 +1,37 @@
-export const BookDetailsPage = () => {
-  // Get book details based on ID whenever user lands on the page
-  // ID will come from route
+import { useParams } from "react-router";
+import { useState, useEffect } from "react";
 
+export const BookDetailsPage = () => {
+  
+  const id = useParams(); 
+
+  const [data, setData] = useState([])
+ 
+  useEffect(() => {
+    getdata()
+  }, [id])
+ 
+  const getdata = () => {
+    fetch(`http://localhost:8080/books?id=${id.id}`).then((response) => (response.json())).then((data) => {
+      console.log("Single Data", data[0])
+      setData(data[0])
+    })
+  }
+ 
   return (
-    <>
+   
       <div className="bookContainer">
-        <h2 className="title">{"show book tile here"}</h2>
-        <img className="image" src={"show book image here"} alt="#" />
-        <div className="author">{"show book Author here"}</div>
-        <div className="description">{"show book Description here"}</div>
-        <div className="price">{"show book Price here"}</div>
-        <div className="section">{"show book section name here"}</div>
-        <div className="isbnNumber">{"show book ISBN number here"}</div>
+        <h2 className="title"><b>Title: </b> {data.title}</h2>
+        <img className="image" src= {data.imageUrl} alt="#" />
+        <div className="author"> <b>Author: </b>{"Unknown"}</div>
+        <div className="description"><b>Description: </b> {data.description}</div>
+        <div className="price"><b>Price: </b>Rs {data.reviews}</div>
+        <div className="section"><b>Section: </b> {data.section}</div>
+        <div className="isbnNumber"><b>ISBN: </b> {data.reviews}2313TTSKCN34</div>
         <ul className="reviews">
-          {/* Reviews will be an array, iterate over them and create a new <li> for every review */}
+        <b>Reviews count:</b> {data.reviews}
         </ul>
       </div>
-    </>
-  );
+    
+  )
 };
